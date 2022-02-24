@@ -1,0 +1,43 @@
+# Please refer https://aka.ms/HTTPSinContainer on how to setup an https developer certificate for your ASP .NET Core service.
+
+version: '3.4'
+
+#create a volume for the my sql container.To ensure Data persists after my sql container is stopped
+volumes:
+  datafiles:
+
+services:
+  restApi:
+    container_name: cart_rest_api
+    image: cart_rest_api
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./logs:/app/logs
+    build:
+      context: .
+      dockerfile: src/RestApi/Dockerfile
+    
+    ## this line is settings development env
+    # environment:
+      # - ASPNETCORE_ENVIRONMENT=Development
+
+  mssql:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    ports:
+      - 1433:1433
+    volumes:
+      - ~/apps/mssql/data:/var/lib/mssqlql/data
+    environment:
+      - ACCEPT_EULA=newuser
+      - SA_PASSWORD=Passwo!rd123!
+    
+  redis:
+    restart: always
+    container_name: redis
+    image: redis:alpine
+    ports:
+      - 6379:6379
+    volumes:
+      - /data/redis-data:/data
+
