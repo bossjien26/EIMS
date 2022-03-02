@@ -12,18 +12,17 @@ namespace RestApi.Test.Repositories
 
         public BaseRepositoryTest()
         {
-            var connectionString = "Server=localhost; Port=3306;User Id=newuser;Password=Passwo!rd123!;Database=Furniture";
+            var connectionString = "Server=localhost,1433;Database=events_service;MultipleActiveResultSets=true;User=SA;Password=Passw@rd;";
             var options = new DbContextOptionsBuilder<DbContextEntity>()
-                .UseMySql(
-                   connectionString,
-                    ServerVersion.AutoDetect(connectionString)
+                .UseSqlServer(
+                   connectionString
                 )
                 .EnableSensitiveDataLogging()
                 .EnableDetailedErrors()
                 .Options;
-            
+
             _context = new DbContextEntity(options);
-        
+
             _redisConnect = ConnectionMultiplexer.Connect(
                     new ConfigurationOptions
                     {
