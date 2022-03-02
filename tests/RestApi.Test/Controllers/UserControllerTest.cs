@@ -21,8 +21,9 @@ namespace RestApi.Test.Controllers
         [Test]
         public void ShouldGenerateJwtToken()
         {
+            var user = UserSeeder.SeedOne();
             //Arrange &  Act
-            var request = new GenerateAuthenticateRequest() { Mail = "jan@example.com", Password = "aaaaaaa" };
+            var request = new GenerateAuthenticateRequest() { Mail = user.Mail, Password = user.Password };
             var response = _httpClient.PostAsync("/api/user/authenticate", PostType(request));
 
             //Assert
@@ -32,6 +33,7 @@ namespace RestApi.Test.Controllers
         [Test]
         public void ShouldShowMany()
         {
+            UserSeeder.SeedOne();
             //Arrange & Act & Assert
             var response = _httpClient.GetAsync("/api/user/1");
 
@@ -42,10 +44,11 @@ namespace RestApi.Test.Controllers
         [Test]
         public async Task ShouldUpdateUser()
         {
-            var user = await _userService.GetVerifyUser("jan@example.com", "aaaaaaa");
+            var user = UserSeeder.SeedOne();
+            var result = await _userService.GetVerifyUser(user.Mail, user.Password);
 
-            user.Name = "test";
-            var response = await _httpClient.PutAsync("/api/user", PostType(user));
+            result.Name = "test";
+            var response = await _httpClient.PutAsync("/api/user", PostType(result));
 
             //Assert
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
