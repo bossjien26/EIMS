@@ -20,7 +20,7 @@ namespace RestApi.Test.DatabaseSeeders
                 .RuleFor(c => c.Name, (f) => f.Random.AlphaNumeric(10))
                 .RuleFor(c => c.Specification, (f) => f.Random.AlphaNumeric(10))
                 .RuleFor(c => c.Quantity, (f) => f.Random.Number(10))
-                .RuleFor(c => c.Price, (f) => f.Random.Number(10))
+                .RuleFor(c => c.Price, (f) => f.Random.Float(1, 10))
                 .RuleFor(c => c.Describe, (f) => f.Random.AlphaNumeric(10))
                 .RuleFor(c => c.Information, (f) => f.Random.AlphaNumeric(10))
                 .RuleFor(c => c.Warehouse, (f) => WarehouseSeeder.SeedOne());
