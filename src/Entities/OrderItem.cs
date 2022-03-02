@@ -13,7 +13,7 @@ namespace Entities
 
         public int ItemId { get; set; }
 
-        public int Specification { get; set; }
+        public string Specification { get; set; }
 
         public int Quantity { get; set; }
 
