@@ -7,7 +7,7 @@ namespace Entities
     {
         public int Id { get; set; }
 
-        public int SKU { get; set; }
+        public int SKU { get; set; } = Convert.ToInt32(DateTimeOffset.Now.ToUnixTimeSeconds());
 
         public int WarehouseId { get; set; }
 

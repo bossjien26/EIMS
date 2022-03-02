@@ -15,8 +15,6 @@ namespace Entities
 
         public int Specification { get; set; }
 
-        public int WarehouseId { get; set; }
-
         public int Quantity { get; set; }
 
         public float Price { get; set; }
@@ -25,7 +23,10 @@ namespace Entities
 
         public DateTime UpdateAt { get; set; }
 
-        [ForeignKey(nameof(WarehouseId))]
-        public Warehouse Warehouse { get; set; }
+        [ForeignKey(nameof(OrderId))]
+        public virtual OrderInfo OrderInfo { get; set; }
+
+        [ForeignKey(nameof(ItemId))]
+        public virtual Item Item { get; set; }
     }
 }
