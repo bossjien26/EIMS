@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
 using NUnit.Framework;
 using Repositories.Interface;
 using RestApi.Test.DatabaseSeeders;
@@ -30,7 +29,7 @@ namespace RestApi.Test.Repositories
         async public Task ShouldGetAll()
         {
             await _repository.InsertMany(UserSeeder.SeedMany(5, 5));
-            var users =  _repository.GetAll().Take(5).ToList();
+            var users = _repository.GetAll().Take(5).ToList();
             Assert.NotNull(users);
             Assert.AreEqual(5, users.Count);
         }
