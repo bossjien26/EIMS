@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Entities
 {
     [Index(nameof(OrderId))]
-    public class OrderItemDetail
+    public class OrderItem
     {
         public int Id { get; set; }
 

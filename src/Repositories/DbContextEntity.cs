@@ -22,7 +22,7 @@ namespace DbEntity
 
         public DbSet<OrderInfo> OrderInfos { get; set; }
 
-        public DbSet<OrderItemDetail> OrderItemDetails { get; set; }
+        public DbSet<OrderItem> OrderItemDetails { get; set; }
 
         #endregion
 
@@ -90,9 +90,9 @@ namespace DbEntity
             modelBuilder.Entity<OrderInfo>().Property(d => d.UpdateAt).HasDefaultValueSql("GETUTCDATE()")
                 .ValueGeneratedOnUpdate();
 
-            modelBuilder.Entity<OrderItemDetail>().Property(d => d.CreateAt).HasDefaultValueSql("GETDATE()")
+            modelBuilder.Entity<OrderItem>().Property(d => d.CreateAt).HasDefaultValueSql("GETDATE()")
                 .ValueGeneratedOnAdd();
-            modelBuilder.Entity<OrderItemDetail>().Property(d => d.UpdateAt).HasDefaultValueSql("GETUTCDATE()")
+            modelBuilder.Entity<OrderItem>().Property(d => d.UpdateAt).HasDefaultValueSql("GETUTCDATE()")
                 .ValueGeneratedOnUpdate();
 
             modelBuilder.Entity<Item>().Property(d => d.CreateAt).HasDefaultValueSql("GETDATE()")
