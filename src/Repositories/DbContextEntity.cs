@@ -21,7 +21,7 @@ namespace DbEntity
 
         public DbSet<OrderInfo> OrderInfos { get; set; }
 
-        public DbSet<OrderItem> OrderItemDetails { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
 
         #endregion
 
