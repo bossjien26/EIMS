@@ -80,5 +80,19 @@ namespace RestApi.Test.Services
                 new CurrencyService(_repoMock.Object).Update(_entityMock.Object)
             );
         }
+
+        [Test]
+        async public Task ShouldGetByName()
+        {
+            // Arrange
+            _repoMock.Setup(r => r.Get(x => x.Name == "Test"))
+                .Returns(Task.FromResult(_entityMock.Object));
+
+            // Act
+            var result = await new CurrencyService(_repoMock.Object).GetByCurrencyName("Test");
+
+            // Assert
+            Assert.IsInstanceOf<Currency>(result);
+        }
     }
 }
