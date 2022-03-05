@@ -4,7 +4,6 @@ namespace Enum
     {
         SuperAdmin = 1,
         Admin = 2,
-        Staff = 3,
-        Customer = 4
+        Staff = 3
     }
 }

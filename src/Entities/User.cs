@@ -25,7 +25,7 @@ namespace Entities
 
         public bool IsVerify { get; set; } = false;
 
-        public RoleEnum Role { get; set; } = Enum.RoleEnum.Customer;
+        public RoleEnum Role { get; set; } = Enum.RoleEnum.Staff;
 
         public DateTime CreateAt { get; set; }
 

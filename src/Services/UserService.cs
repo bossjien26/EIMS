@@ -91,8 +91,6 @@ namespace Services
                     return "Admin";
                 case RoleEnum.Staff:
                     return "Staff";
-                case RoleEnum.Customer:
-                    return "Customer";
                 default:
                     return "";
             }
