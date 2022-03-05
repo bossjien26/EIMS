@@ -7,9 +7,9 @@ volumes:
   events_mssql:
 
 services:
-  EIMSApi:
-    container_name: EIMSApi
-    image: EIMSApi
+  eims_api:
+    container_name: eims_api
+    image: eims_api
     ports:
       - "5000:5000"
     volumes:
@@ -18,9 +18,9 @@ services:
       context: .
       dockerfile: src/RestApi/Dockerfile
 
-  EIMSJob:
-    container_name: EIMSJob
-    image: EIMSJob
+  eims_job:
+    container_name: eims_job
+    image: eims_job
     ports:
       - "5001:5001"
     volumes:
