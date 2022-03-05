@@ -1,5 +1,11 @@
 # Inventory Management System
 
+## Project structure
+
+- Schedule Job : run host background service
+
+- Rest Api : execute inventory management service
+
 ## Database
 
 ### How to start a database locally
