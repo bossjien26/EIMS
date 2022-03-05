@@ -8,7 +8,7 @@ volumes:
 
 services:
   EIMSApi:
-    container_name: EIMS
+    container_name: EIMSApi
     image: EIMSApi
     ports:
       - "5000:5000"
@@ -19,8 +19,8 @@ services:
       dockerfile: src/RestApi/Dockerfile
 
   EIMSJob:
-    container_name: EIMS_Job
-    image: EIMS_api
+    container_name: EIMSJob
+    image: EIMSJob
     ports:
       - "5001:5001"
     volumes:
