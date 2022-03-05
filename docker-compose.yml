@@ -18,11 +18,7 @@ services:
       context: .
       dockerfile: src/RestApi/Dockerfile
 
-    ## this line is settings development env
-    # environment:
-    # - ASPNETCORE_ENVIRONMENT=Development
-
-  restApi:
+  EIMS:
     container_name: EIMS_Job
     image: EIMS_api
     ports:
