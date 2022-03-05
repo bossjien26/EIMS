@@ -8,8 +8,8 @@ volumes:
 
 services:
   restApi:
-    container_name: cart_rest_api
-    image: cart_rest_api
+    container_name: EIMS
+    image: EIMS_api
     ports:
       - "5000:5000"
     volumes:
@@ -22,22 +22,16 @@ services:
     # environment:
     # - ASPNETCORE_ENVIRONMENT=Development
 
-  # mssql:
-  #   image: mcr.microsoft.com/mssql/server:2019-GDR1-ubuntu-16.04
-  #   # image: mcr.microsoft.com/azure-sql-edge:latest
-  #   container_name: mssql2019
-  #   ports:
-  #     - "1433:1433"
-  #   volumes:
-  #     - events_mssql:/var/opt/mssql
-  #   # volumes:
-  #   #   - ~/apps/mssql/data:/var/lib/mssqlql/data
-  #   environment:
-  #     ACCEPT_EULA: Y
-  #     SA_PASSWORD: 2astazeY
-      # MSSQL_DB: dev
-      # MSSQL_USER: User
-      # MSSQL_PASSWORD: Passwo!rd123!
+  restApi:
+    container_name: EIMS_Job
+    image: EIMS_api
+    ports:
+      - "5001:5001"
+    volumes:
+      - ./logs:/app/logs
+    build:
+      context: .
+      dockerfile: src/ScheduleJob/Dockerfile
 
   mssql:
     # platform: linux/amd64
