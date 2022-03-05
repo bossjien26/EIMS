@@ -1,23 +1,11 @@
-# Rest-Api
-
-## Front-End project example
-
-[front-end project](https://github.com/bossjien26/webpack-vue)
+# Inventory Management System
 
 ## Database
 
 ### How to start a database locally
 
 ```sh
-docker compose up -d database
-```
-
-### How to setting allow connect in mysql
-
-```mysql
-CREATE USER 'User Account'@'Docker Database Ip' IDENTIFIED BY 'Password';
-GRANT ALL PRIVILEGES ON *.* TO 'User Account'@'Docker Database Ip' WITH GRANT OPTION;
-Flush Privileges;
+docker compose up -d mssql
 ```
 
 ### Database connection strings
@@ -26,7 +14,9 @@ Modify the `ConnectionStrings` in `DefaultConnection` at the following file
 
 ### development is use in develop env , production use in product env
 
-> src/RestApi/ appsettings-Development.json  or appsettings-Production.json
+> src/RestApi/ appsettings-Development.json or appsettings-Production.json
+
+> src/ScheduleJob/ appsettings-Development.json or appsettings-Production.json
 
 ### Redis
 
@@ -92,7 +82,7 @@ dotnet build
 ### How build project in docker
 
 ```sh
-#switch to root 
+#switch to root
 docker-compose up -d cart_rest_api
 ```
 
@@ -141,15 +131,3 @@ dotnet test Directory/Test.csproj
 #filter the test method name
 dotnet test Directory/Test.csproj --filter MethodName
 ```
-
-## Api example
-
-### This is the route table for Api Example:
-
-| VERB   | URL                                | DESCRIPTION                   |
-| ------ | ---------------------------------- | ----------------------------- |
-| GET    | api/ControllerRoute/MethodRoute    | Retrieves stock items         |
-| GET    | api/ControllerRoute/MethodRoute/Id | Retrieves a stock item by id  |
-| POST   | api/ControllerRoute/MethodRoute    | Create a new stock item       |
-| PUT    | api/ControllerRoute/MethodRoute    | Update an existing stock item |
-| DELETE | api/ControllerRoute/MethodRoute/Id | Delete an existing stock item |
