@@ -1,4 +1,9 @@
 ﻿using System;
+using DbEntity;
+using Helpers;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Quartz;
 
@@ -16,6 +21,18 @@ namespace ScheduleJob
         Host.CreateDefaultBuilder(args)
         .ConfigureServices((hostContext, services) =>
         {
+            IConfiguration configuration = hostContext.Configuration;
+            var appSettings = configuration.GetSection("AppSettings").Get<AppSettings>();
+
+            services.AddSingleton(appSettings);
+
+
+            services.AddDbContext<DbContextEntity>(dbContextOptions =>
+                dbContextOptions.UseSqlServer(appSettings.ConnectionStrings.DefaultConnection)
+                .EnableSensitiveDataLogging()
+                .EnableDetailedErrors()
+            );
+
             services.AddQuartz(q =>
             {
                 q.UseMicrosoftDependencyInjectionScopedJobFactory();
@@ -30,11 +47,18 @@ namespace ScheduleJob
                 q.AddTrigger(opts => opts
                     .ForJob(exchangeRateJobKey) // link to the HelloWorldJob
                     .WithIdentity("job-trigger") // give the trigger a unique name
-                    .WithCronSchedule("0/5 * * * * ?")); // run every 5 seconds
-                                                         // .StartNow());
+                                                 // .WithCronSchedule("0/5 * * * * ?")); // run every 5 seconds
+                                                 // .WithCronSchedule("0 0 0 * * ?")); // run every day
+                    .StartNow());
             });
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
-            // ...
+
+        }).ConfigureAppConfiguration((context, builder) =>
+        {
+            builder.SetBasePath(AppContext.BaseDirectory)
+            .AddJsonFile("appsettings.json", optional: false)
+            .AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json",
+             optional: true);
         });
     }
 }
