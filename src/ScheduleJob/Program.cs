@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NLog.Extensions.Logging;
 using Quartz;
 
 namespace ScheduleJob
@@ -13,7 +15,6 @@ namespace ScheduleJob
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("I'm Live");
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -33,6 +34,7 @@ namespace ScheduleJob
                 .EnableDetailedErrors()
             );
 
+            #region Job
             services.AddQuartz(q =>
             {
                 q.UseMicrosoftDependencyInjectionScopedJobFactory();
@@ -51,9 +53,20 @@ namespace ScheduleJob
                                                  // .WithCronSchedule("0 0 0 * * ?")); // run every day
                     .StartNow());
             });
+            #endregion
+
             services.AddQuartzHostedService(q => q.WaitForJobsToComplete = true);
 
-        }).ConfigureAppConfiguration((context, builder) =>
+            services.AddLogging(loggingBuilder =>
+            {
+                // configure Logging with NLog
+                loggingBuilder.ClearProviders();
+                loggingBuilder.SetMinimumLevel(LogLevel.Trace);
+                loggingBuilder.AddNLog(
+                    $"nlog.{hostContext.HostingEnvironment.EnvironmentName}.config");
+            });
+        })
+        .ConfigureAppConfiguration((context, builder) =>
         {
             builder.SetBasePath(AppContext.BaseDirectory)
             .AddJsonFile("appsettings.json", optional: false)
