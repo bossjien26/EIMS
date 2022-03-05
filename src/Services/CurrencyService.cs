@@ -33,5 +33,7 @@ namespace Services
                 .OrderByDescending(x => x.Id);
 
         public async Task<Currency> GetById(int id) => await _repository.Get(c => c.Id == id);
+
+        public async Task<Currency> GetByCurrencyName(string name) => await _repository.Get(c => c.Name == name);
     }
 }

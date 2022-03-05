@@ -15,5 +15,7 @@ namespace Services.Interface
         IQueryable<Currency> GetMany(int index, int size);
 
         Task<Currency> GetById(int id);
+
+        Task<Currency> GetByCurrencyName(string name);
     }
 }
