@@ -49,9 +49,9 @@ namespace ScheduleJob
                 q.AddTrigger(opts => opts
                     .ForJob(exchangeRateJobKey) // link to the HelloWorldJob
                     .WithIdentity("job-trigger") // give the trigger a unique name
-                                                 // .WithCronSchedule("0/5 * * * * ?")); // run every 5 seconds
-                                                 // .WithCronSchedule("0 0 0 * * ?")); // run every day
-                    .StartNow());
+                    // .WithCronSchedule("0/5 * * * * ?")); // run every 5 seconds
+                    .WithCronSchedule("0 0 0 * * ?")); // run every day
+                    // .StartNow());
             });
             #endregion
 
