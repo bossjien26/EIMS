@@ -15,8 +15,8 @@ COPY ["src/Services/Services.csproj","src/Services/"]
 COPY ["src/Entities/Entities.csproj","src/Entities/"]
 COPY ["src/Repositories/Repositories.csproj","src/Repositories/"]
 COPY ["src/Helpers/Helpers.csproj","src/Helpers/"]
-# COPY ["src/Enum/Enum.csproj","src/Enum/"]
-RUN dotnet restore "src/ScheduleJob/ReScheduleJobstApi.csproj"
+COPY ["src/Enum/Enum.csproj","src/Enum/"]
+RUN dotnet restore "src/ScheduleJob/ScheduleJob.csproj"
 COPY . .
 WORKDIR "/src/src/ScheduleJob"
 RUN dotnet build "ScheduleJob.csproj" -c Release -o /app/build
